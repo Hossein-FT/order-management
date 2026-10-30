@@ -5,7 +5,7 @@ A Java 21 / Spring Boot REST API for a small but realistic order-management doma
 ## Stack
 
 - Java 21
-- Spring Boot 3.5.6
+- Spring Boot 3.5.16
 - Maven 3.9+
 - PostgreSQL 17 Alpine
 - Spring Data JPA / Hibernate
