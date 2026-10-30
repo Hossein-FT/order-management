@@ -112,8 +112,8 @@ POST /api/v1/orders/1/cancel
 - `OrderItem.product` is a real `@ManyToOne` relationship to `Product` using `product_id`.
 - Order items also snapshot `productName` and `unitPrice`, so later product edits do not rewrite historical orders. API responses use the related product ID and the historical name/price snapshots.
 - Business conflicts return HTTP 409; request validation errors return HTTP 400.
-- Hibernate manages schema creation/update (`ddl-auto: update`); Flyway is intentionally not used for this assignment.
-- The current code is organized by technical layers (`controller`, `service`, `repository`, `entity`, `dto`). The next architectural hardening step for a strict Clean Architecture requirement is to separate domain/application ports from JPA persistence models and web adapters.
+- Hibernate manages schema creation/update (`ddl-auto: update`).
+- The current code is organized by technical layers (`controller`, `service`, `repository`, `entity`, `dto`).
 
 See `docs/` for business rules, architecture notes, and API examples.
 
