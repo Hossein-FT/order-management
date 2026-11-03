@@ -7,6 +7,7 @@ import java.math.BigDecimal;
 @Entity
 @Table(name = "order_items", uniqueConstraints = @UniqueConstraint(
         name = "uk_order_product", columnNames = {"order_id", "product_id"}))
+//@Check(constraints = "quantity > 0 AND unit_price >= 0")
 public class OrderItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

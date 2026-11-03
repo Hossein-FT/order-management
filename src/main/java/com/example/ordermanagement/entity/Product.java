@@ -5,7 +5,8 @@ import jakarta.persistence.*;
 import java.math.BigDecimal;
 
 @Entity
-@Table(name = "products", indexes = @Index(name = "idx_products_active", columnList = "active"))
+@Table(name = "products")
+//@Check(constraints = "stock_quantity >= 0")
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,8 +19,6 @@ public class Product {
     private int stockQuantity;
     @Column(nullable = false)
     private boolean active = true;
-    @Version
-    private long version;
 
     protected Product() {
     }

@@ -1,19 +1,26 @@
 package com.example.ordermanagement.service;
 
-import com.example.ordermanagement.dto.*;
-import com.example.ordermanagement.entity.*;
+import com.example.ordermanagement.dto.CreateOrderRequest;
+import com.example.ordermanagement.dto.OrderItemRequest;
+import com.example.ordermanagement.dto.OrderItemResponse;
+import com.example.ordermanagement.dto.OrderResponse;
+import com.example.ordermanagement.entity.CustomerOrder;
+import com.example.ordermanagement.entity.OrderItem;
+import com.example.ordermanagement.entity.OrderStatus;
+import com.example.ordermanagement.entity.Product;
 import com.example.ordermanagement.exception.BusinessException;
 import com.example.ordermanagement.exception.ResourceNotFoundException;
 import com.example.ordermanagement.repository.OrderRepository;
 import com.example.ordermanagement.repository.ProductRepository;
-
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 @Service
 public class OrderService {
@@ -85,8 +92,10 @@ public class OrderService {
     }
 
     private OrderResponse toResponse(CustomerOrder order) {
-        List<OrderItemResponse> items = order.getItems().stream()
-                .map(i -> new OrderItemResponse(i.getProductId(), i.getProductName(), i.getQuantity(), i.getUnitPrice(), i.getUnitPrice().multiply(BigDecimal.valueOf(i.getQuantity())))).toList();
+        List<OrderItemResponse> items = order.getItems()
+                .stream()
+                .map(i -> new OrderItemResponse(i.getProductId(), i.getProductName(), i.getQuantity(), i.getUnitPrice(), i.getUnitPrice().multiply(BigDecimal.valueOf(i.getQuantity()))))
+                .toList();
         return new OrderResponse(order.getId(), order.getStatus(), order.getTotalAmount(), order.getCreatedAt(), items);
     }
 }
